@@ -1,0 +1,58 @@
+## Dotnet and Angular
+
+#### Some useful dotnet commands
+
+0. Check information about your dotnet sdk installed
+> dotnet --info
+
+1. Create an empty solution
+> dotnet new sln (This creates an empty solution with the folder name in which you execute the command)
+
+2. Create a web api
+> dotnet new webapi -o API (Here API is the name of the project, change according to your wish)
+
+3. Add the web api to the empty solution
+> dotnet sln add API (Again, here API is the project name, so change accordingly)
+
+4. To execute the project
+> dotnet run
+
+5. To execute the project while updating the changes in real time
+> dotnet watch run
+
+---------------------------------------------------------------------
+
+#### Entity Framework
+
+- It is an Object Relational Mapper (ORM)
+
+- Translates our code into SQL commands that update our tables in the database
+
+- DbContext is the class that acts as a bridge between entity classes and the database. 
+
+- It allows us to write linq queries that translates to SQL commands.
+
+- EF features: querying, change tracking, saving, concurrency, transactions, caching, built-in conventions, configurations, migrations
+
+
+#### Install Entity Framework from nuget package manager
+> Microsoft.EntityFrameworkCore
+> Microsoft.EntityFrameworkCore.Design
+> Microsoft.EntityFrameworkCore.Sqlite
+
+
+### Install Entity Framework Core Tools for migration
+> dotnet tool install --global dotnet-ef --version 5.0.0
+Specify your version accordingly.
+
+And do create the Migration file as below
+> dotnet ef migrations add InitialCreate -o Data/Migrations
+
+#### Make your code Asynchronous
+Currently we are blocking the thread when we are not using async.
+
+[HttpGet("{id}")]
+        public async Task<ActionResult<AppUser>> GetUser(int id)
+        {
+            return await _context.Users.FindAsync(id);
+        }
