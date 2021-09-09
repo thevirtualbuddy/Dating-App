@@ -45,3 +45,14 @@
 > dotnet tool install --global dotnet-ef --version 5.0.0
 Specify your version accordingly.
 
+And do create the Migration file as below
+> dotnet ef migrations add InitialCreate -o Data/Migrations
+
+#### Make your code Asynchronous
+Currently we are blocking the thread when we are not using async.
+
+[HttpGet("{id}")]
+        public async Task<ActionResult<AppUser>> GetUser(int id)
+        {
+            return await _context.Users.FindAsync(id);
+        }
