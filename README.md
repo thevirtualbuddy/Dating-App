@@ -1,3 +1,4 @@
 # Dating-App
 Building a dating app alongside Udemy tutorial.
-Minor change for testing
+Course name: Build an app with ASP.NET Core and Angular from scratch
+Instructor name: Neil Cummings
