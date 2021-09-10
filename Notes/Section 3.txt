@@ -1,0 +1,18 @@
+* Install angular CLI
+> npm install -g @angular/cli
+
+* Create the app
+> ng new app_name
+
+- The js file references get injected in our index.html with the help of webpack. 
+
+* To run the app
+> Run the app as ng serve -o 
+
+* Add some VS extension:
+> Angular Language Service
+> Angular Snippets
+> Brackets pair Colorizer
+
+
+
