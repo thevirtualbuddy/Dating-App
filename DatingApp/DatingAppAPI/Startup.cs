@@ -36,6 +36,14 @@ namespace DatingAppAPI
             });
 
             services.AddControllers();
+            // Adding the cors service.
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DatingAppAPI", Version = "v1" });
@@ -55,6 +63,8 @@ namespace DatingAppAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            //Enabling CORS policy
+            app.UseCors("MyPolicy");
 
             app.UseAuthorization();
 
