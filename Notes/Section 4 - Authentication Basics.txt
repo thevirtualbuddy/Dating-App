@@ -1,0 +1,62 @@
+* How to store passwords?
+1. Plain text: Terrible idea.
+2. Hash the password & store the hash: okay, but still vulnerable to dictionary attacks. 
+3. Hash & salting a password. 
+
+-----------------------------------------------------------
+
+* Update User entity and add PasswordHash and PasswordSalt property and do the migrations:
+> dotnet ef migrations add UserPasswordadded
+Next, modify the database
+> dotnet ef database update
+
+* When we send anything in the body, we have to receive it as an object in our api methods. 
+
+* Since, we are having issue while sending username and password in the body where our method is accepting strings and not object. We need to use DTO (Data Transfer Object)
+
+* DTO can helps flatten object. 
+
+* To drop database:
+> dotnet ef database drop
+
+* To update/renew database:
+> dotnet ef database update
+
+-------------------------------------------------------------
+
+* JSON Web Tokens (JWT)
+-> Industry Standard for tokens(RFC 7519)
+-> Self-contained and can contain:
+	* Credentials
+	* Claims
+	* Other information 
+
+* JWT Structure:
+3 parts separated by period (.)
+1st part: header of the token containing the algorithm to encrypt the singature and type of token that it is. 
+
+2nd part: Payload, contains information about claims and credentials, contains time and date too.
+
+3rd part: contains signature, encrypted by the server itself. 
+
+
+* Token authentication
+1. Client sends username+password to server
+2. Server validates the credentials and returns a JWT
+3. Sends JWT with further requests. 
+
+* Benefits of JWT:
+- No session to manage: JWTs are self contained tokens
+- Portable: a single token can be used with multiple backends. 
+- No cookies required: mobile friendly
+- Performance: once a token is issue, there is no need to make a database request to verify a users authentication. 
+
+----------------------------------------------------------
+* Steps to Implement JWT Authentication
+-> Implement Interfaces and Services to handle the token service
+-> Change Startup.cs's ConfigureServices method and add:
+// Adding for JWT service
+            services.AddScoped<ITokenService, TokenService>();
+-> Install the System.IdentityModel.Tokens.Jwt package from the nuget manager. 
+
+
